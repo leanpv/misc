@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <form [formGroup]='formulario' (ngSubmit)='guardar()'>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Email *</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName='email' [class.is-invalid]="noValid('email')">
+                <small *ngIf="noValid('email')" class="text-danger">Email incorrecto</small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Password *</label>
+                <input type="password" class="form-control" placeholder="Contraseña" formControlName='password' [class.is-invalid]="noValid('password')">
+                <small *ngIf="noValid('password')" class="text-danger">Mínimo 5 caracteres</small>
+            </div>
+        </div>
+        <div class="form-row" formGroupName='direccion'>
+            <div class="form-group col-12">
+                <label for="inputAddress">Address *</label>
+                <input type="text" class="form-control" formControlName='address' [class.is-invalid]="noValidDir('address')">
+                <small *ngIf="noValidDir('address')" class="text-danger">Direccion requerida</small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputCity">City *</label>
+                <input type="text" class="form-control" formControlName='city' [class.is-invalid]="noValidDir('city')">
+                <small *ngIf="noValidDir('city')" class="text-danger">Ciudad requerida</small>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputState">State *</label>
+                <select class="form-control" formControlName='state' [class.is-invalid]="noValidDir('state')">
+                <option selected>Choose...</option>
+                <option>CABA</option>
+                <option>GBA</option>
+                </select>
+                <small *ngIf="noValidDir('state')" class="text-danger">Estado requerido</small>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" formControlName='zip'>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" formControlName='check' type="checkbox" [class.is-invalid]="noValid('check')">
+                <label class="form-check-label" for="gridCheck">Hé leído los términos y condiciones</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+
+    <div class="container bg-light my-3 border">
+        <pre class="mt-4">
+            <b>Estado del formulario: </b>{{ formulario.valid }}
+            <b>Status: </b>{{ formulario.status }}
+        </pre>
+        <pre>
+            {{ formulario.value | json }}
+        </pre>
+    </div>
+</div>
