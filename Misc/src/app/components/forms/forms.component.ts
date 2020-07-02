@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-forms',
@@ -19,13 +19,22 @@ export class FormsComponent implements OnInit {
   }
 
   noValid(formControlName) {
-    // console.log(formControlName);
+    // console.log(formControlName); 
     return this.formulario.get(formControlName).invalid && this.formulario.get(formControlName).touched;
   }
 
   noValidDir(formControlName) {
     // console.log(formControlName);
     return this.formulario.get(`direccion.${ formControlName }`).invalid && this.formulario.get(`direccion.${ formControlName }`).touched;
+  }
+
+  noValidPasatiempo(formControlName) {
+    // console.log('pasatiempos', this.formulario.get(`pasatiempos.${ formControlName }`));
+    return this.formulario.get(`pasatiempos.${formControlName}`).invalid && this.formulario.get(`pasatiempos.${formControlName}`).touched;
+  }
+
+  get pasatiempos() {
+    return this.formulario.get('pasatiempos') as FormArray;
   }
 
   crearFormulario() {
@@ -39,7 +48,8 @@ export class FormsComponent implements OnInit {
         city: ['', Validators.required],
         state: ['', Validators.required],
         zip: [''],
-      })
+      }),
+      pasatiempos: this.formBuilder.array([])
     });
   }
 
@@ -55,14 +65,25 @@ export class FormsComponent implements OnInit {
         zip: '11123'
       }
     });
+    // Cargar elementos predeterminados dentro del array
+    ['Correr', 'Ver series', ''].forEach( valor => this.pasatiempos.push( this.formBuilder.control(valor, Validators.required)));
+  }
+
+  borrarPasatiempo(i: number) {
+    this.pasatiempos.removeAt(i);
+  }
+
+  agregarPasatiempo() {
+    this.pasatiempos.push( this.formBuilder.control('', Validators.required));
   }
 
   guardar() {
-    console.log(this.formulario);
+    // console.log(this.formulario);
 
     if (this.formulario.invalid) {
       return Object.values( this.formulario.controls ).forEach( control => {
-        if (control instanceof FormGroup) {
+        console.log(control);
+        if (control instanceof FormGroup || control instanceof FormArray) {
           Object.values( control.controls ).forEach( ctrl => ctrl.markAsTouched());
         } else {
           control.markAsTouched();
