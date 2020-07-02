@@ -37,6 +37,36 @@
                 <input type="text" class="form-control" formControlName='zip'>
             </div>
         </div>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-12">
+                <table class="table" style="margin-top: 16px">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Pasatiempo</th>
+                            <th>Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName='pasatiempos'>
+                        <ng-container *ngFor="let control of pasatiempos.controls; let i = index">
+                            <tr scope="row">
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                    <input class="form-control" type="text" [formControlName]='i' [class.is-invalid]="noValidPasatiempo(i)">
+                                </td>
+                                <td> <button class="btn btn-danger btn-block" type="button" (click)="borrarPasatiempo(i)">Borrar</button></td>
+                            </tr>
+                            <tr scope="row" class="text-danger noBorder" *ngIf="noValidPasatiempo(i)">
+                                <td></td>
+                                <td colspan="3">Campos requeridos - ingresar datos</td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary btn-block" type="button" (click)="agregarPasatiempo()">Agregar</button>
+            </div>
+        </div>
         <div class="form-group">
             <div class="form-check">
                 <input class="form-check-input" formControlName='check' type="checkbox" [class.is-invalid]="noValid('check')">
