@@ -7,16 +7,26 @@
                 <small *ngIf="noValid('email')" class="text-danger">Email incorrecto</small>
             </div>
             <div class="form-group col-md-6">
+                <label for="inputEmail4">Usuario *</label>
+                <input type="email" class="form-control" placeholder="Usuario" formControlName='usuario' [class.is-invalid]="noValid('usuario')">
+                <small *ngIf="noValid('usuario')" class="text-danger">Este usuario ya fue tomado y debe tener 4 caracteres o más</small>
+            </div>
+            <div class="form-group col-md-6">
                 <label for="inputPassword4">Password *</label>
                 <input type="password" class="form-control" placeholder="Contraseña" formControlName='password' [class.is-invalid]="noValid('password')">
                 <small *ngIf="noValid('password')" class="text-danger">Mínimo 5 caracteres</small>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Repita Password *</label>
+                <input type="password" class="form-control" placeholder="Repita password" formControlName='password2' [class.is-invalid]="pass2NoValid()">
+                <small *ngIf="noValid('password2')" class="text-danger">Debe ser igual y tener un mínimo de 5 caracteres</small>
             </div>
         </div>
         <div class="form-row" formGroupName='direccion'>
             <div class="form-group col-12">
                 <label for="inputAddress">Address *</label>
                 <input type="text" class="form-control" formControlName='address' [class.is-invalid]="noValidDir('address')">
-                <small *ngIf="noValidDir('address')" class="text-danger">Direccion requerida</small>
+                <small *ngIf="noValidDir('address')" class="text-danger">Direccion requerida o palabra 'custom' prohibida</small>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputCity">City *</label>
