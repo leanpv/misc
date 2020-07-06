@@ -5,17 +5,17 @@ describe('Pruebas de clase', () => {
     let jugador = new Jugador();
 
     beforeAll( () => {
-        console.log('beforeAll');
+        // console.log('beforeAll');
     });
     beforeEach( () => {
-        console.log('beforeEach: resetea el hp del jugador a 100 antes de cada IT');
+        // console.log('beforeEach: resetea el hp del jugador a 100 antes de cada IT');
         jugador = new Jugador();
     });
     afterAll( () => {
-        console.log('afterAll');
+        // console.log('afterAll');
     });
     afterEach( () => {
-        console.log('afterEach');
+        // console.log('afterEach');
     });
 
     it('Debe regresar 80, hp si recibe 20 dmg', () => {
