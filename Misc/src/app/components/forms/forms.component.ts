@@ -10,6 +10,7 @@ import { ValidatorsService } from '../../services/validators.service';
 export class FormsComponent implements OnInit {
 
   formulario: FormGroup;
+  visible = 'password';
 
   constructor(private formBuilder: FormBuilder, private validatorServ: ValidatorsService) {
     this.crearFormulario();
@@ -18,6 +19,14 @@ export class FormsComponent implements OnInit {
   }
 
   ngOnInit( ) {}
+
+  isVisible() {
+    if (this.visible === 'password') {
+      this.visible = 'text';
+    } else {
+      this.visible = 'password';
+    }
+  }
 
   noValid(formControlName) {
     // console.log(formControlName);
