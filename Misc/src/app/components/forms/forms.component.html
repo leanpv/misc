@@ -13,8 +13,10 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Password *</label>
-                <input type="password" class="form-control" placeholder="Contraseña" formControlName='password' [class.is-invalid]="noValid('password')">
+                <input [type]="visible" class="form-control" placeholder="Contraseña" formControlName='password' [class.is-invalid]="noValid('password')">
                 <small *ngIf="noValid('password')" class="text-danger">Mínimo 5 caracteres</small>
+
+                <button type="button" (click)='isVisible()' class="btn btn-primary">S</button>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Repita Password *</label>
